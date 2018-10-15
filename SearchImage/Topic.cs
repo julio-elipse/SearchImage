@@ -11,13 +11,15 @@ namespace SearchImage
     /// Path to a topic file on a documentation project
     /// </summary>
     public string TopicPath { get; set; }
-
+    /// <summary>
+    /// Class constructor
+    /// </summary>
+    /// <param name="p_strPath">Full path of a topic file</param>
     public Topic(string p_strPath)
     {
       if (String.IsNullOrEmpty(p_strPath))
       {
-        Console.WriteLine(Constants.IMG_TOPIC_MSG_ERROR_NULL_EMPTY);
-        Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+        GlobalResult.LogErrorAndQuit(Constants.IMG_TOPIC_MSG_ERROR_NULL_EMPTY);
       }
       else
       {
@@ -27,11 +29,14 @@ namespace SearchImage
         }
         else
         {
-          Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_ERROR_DOES_NOT_EXIST, p_strPath));
-          Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+          GlobalResult.LogErrorAndQuit(String.Format(Constants.IMG_TOPIC_MSG_ERROR_DOES_NOT_EXIST, p_strPath));
         }
       }
     }
+    /// <summary>
+    /// Method to search for an image file on a topic file
+    /// </summary>
+    /// <param name="p_strImage">Name of an image file, without a path</param>
     public void SearchForImage(string p_strImage)
     {
       XmlDocument m_xmlTopic = new XmlDocument();
@@ -43,35 +48,30 @@ namespace SearchImage
         {
           if (m_xmlImages.Count == 1)
           {
-            Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_IMAGE_FOUND_SINGLE, m_xmlImages.Count, p_strImage, TopicPath));
+            GlobalResult.LogGeneralMessage(String.Format(Constants.IMG_TOPIC_MSG_IMAGE_FOUND_SINGLE, m_xmlImages.Count, p_strImage, TopicPath));
           }
           else
           {
-            Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_IMAGE_FOUND_MANY, m_xmlImages.Count, p_strImage, TopicPath));
+            GlobalResult.LogGeneralMessage(String.Format(Constants.IMG_TOPIC_MSG_IMAGE_FOUND_MANY, m_xmlImages.Count, p_strImage, TopicPath));
           }
-          //Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_IMAGE_FOUND, m_xmlImages.Count, p_strImage, TopicPath));
           GlobalResult.NumberOfReferences += m_xmlImages.Count;
         }
       }
       catch(FileNotFoundException m_exNotFound)
       {
-        Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_ERROR_FILE_NOT_FOUND, TopicPath, m_exNotFound.Message));
-        Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+        GlobalResult.LogErrorAndQuit(String.Format(Constants.IMG_TOPIC_MSG_ERROR_FILE_NOT_FOUND, TopicPath, m_exNotFound.Message));
       }
       catch(IOException m_exIO)
       {
-        Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_ERROR_IO_EXCEPTION, TopicPath, m_exIO.Message));
-        Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+        GlobalResult.LogErrorAndQuit(String.Format(Constants.IMG_TOPIC_MSG_ERROR_IO_EXCEPTION, TopicPath, m_exIO.Message));
       }
       catch(XmlException m_exXml)
       {
-        Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_ERROR_XML_EXCEPTION, TopicPath, m_exXml.Message));
-        Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+        GlobalResult.LogErrorAndQuit(String.Format(Constants.IMG_TOPIC_MSG_ERROR_XML_EXCEPTION, TopicPath, m_exXml.Message));
       }
       catch(XPathException m_exXPath)
       {
-        Console.WriteLine(String.Format(Constants.IMG_TOPIC_MSG_ERROR_XPATH_EXCEPTION, TopicPath, m_exXPath.Message));
-        Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+        GlobalResult.LogErrorAndQuit(String.Format(Constants.IMG_TOPIC_MSG_ERROR_XPATH_EXCEPTION, TopicPath, m_exXPath.Message));
       }
     }
   }

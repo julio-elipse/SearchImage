@@ -6,6 +6,9 @@ namespace SearchImage
   {
     static void Main(string[] args)
     {
+      //This program must receive two arguments,
+      //a path to a folder to search for documentation projects
+      //and a full path to an image file
       if (args.Length == Constants.IMG_ARG_VALID_COUNT)
       {
         ImageSearch m_isSearch = new ImageSearch(args[Constants.IMG_ARG_PATH_NAME_INDEX], args[Constants.IMG_ARG_IMAGE_NAME_INDEX]);
@@ -14,8 +17,7 @@ namespace SearchImage
       }
       else
       {
-        Console.WriteLine(Constants.IMG_PROG_MSG_INVALID_ARG);
-        Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
+        GlobalResult.LogErrorAndQuit(Constants.IMG_PROG_MSG_INVALID_ARG);
       }
     }
   }
