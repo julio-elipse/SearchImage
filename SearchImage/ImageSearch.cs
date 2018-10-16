@@ -103,6 +103,7 @@ namespace SearchImage
     /// </summary>
     public void LoadProjects()
     {
+      GlobalResult.LogGeneralMessage(Constants.IMG_SEARCH_MSG_START_APP);
       GlobalResult.LogGeneralMessage(Constants.IMG_SEARCH_MSG_START_LOADING_PROJECT);
       IEnumerable<string> m_lstProjects;
       try
@@ -161,6 +162,7 @@ namespace SearchImage
       }
       ExecutionTime.Stop();
       GlobalResult.LogGeneralMessage(String.Format(Constants.IMG_SEARCH_MSG_EXECUTION_TIME, ExecutionTime.Elapsed.Hours, ExecutionTime.Elapsed.Minutes, ExecutionTime.Elapsed.Seconds, ExecutionTime.Elapsed.Milliseconds));
+      GlobalResult.SaveLogFile();
     }
   }
 }

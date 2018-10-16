@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 namespace SearchImage
 {
   static class GlobalResult
@@ -8,6 +10,10 @@ namespace SearchImage
     /// </summary>
     public static int NumberOfReferences;
     /// <summary>
+    /// Global variable to store all log messages and then later save them to a log file
+    /// </summary>
+    public static List<string> LogMessages = new List<string>();
+    /// <summary>
     /// Method to log an error message to system console
     /// and then quits the application
     /// </summary>
@@ -15,6 +21,7 @@ namespace SearchImage
     public static void LogErrorAndQuit(string p_strMessage)
     {
       Console.WriteLine(p_strMessage);
+      LogMessages.Add(p_strMessage);
       Environment.Exit(Constants.IMG_ENV_EXIT_FAIL);
     }
     /// <summary>
@@ -25,6 +32,7 @@ namespace SearchImage
     public static void LogGeneralMessage(string p_strMessage)
     {
       Console.WriteLine(p_strMessage);
+      LogMessages.Add(p_strMessage);
     }
     /// <summary>
     /// Method to log a separator line
@@ -34,6 +42,14 @@ namespace SearchImage
     {
       string m_strSeparator = new string(Constants.IMG_SEARCH_MSG_SEPARATOR_CHAR, Constants.IMG_SEARCH_MSG_SEPARATOR_SIZE);
       LogGeneralMessage(m_strSeparator);
+      //LogMessages.Add(m_strSeparator);
+    }
+
+    public static void SaveLogFile()
+    {
+      string m_strLogName = String.Format(Constants.IMG_LOG_FILENAME,Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), DateTime.Now.ToString(Constants.IMG_LOG_FULLDATE));
+      Console.WriteLine(String.Format(Constants.IMG_LOG_MORE_INFO, m_strLogName));
+      File.WriteAllLines(m_strLogName, LogMessages);
     }
   }
 }
