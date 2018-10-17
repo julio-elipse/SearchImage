@@ -42,14 +42,28 @@ namespace SearchImage
     {
       string m_strSeparator = new string(Constants.IMG_SEARCH_MSG_SEPARATOR_CHAR, Constants.IMG_SEARCH_MSG_SEPARATOR_SIZE);
       LogGeneralMessage(m_strSeparator);
-      //LogMessages.Add(m_strSeparator);
     }
 
     public static void SaveLogFile()
     {
       string m_strLogName = String.Format(Constants.IMG_LOG_FILENAME,Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), DateTime.Now.ToString(Constants.IMG_LOG_FULLDATE));
       Console.WriteLine(String.Format(Constants.IMG_LOG_MORE_INFO, m_strLogName));
-      File.WriteAllLines(m_strLogName, LogMessages);
+      try
+      {
+        File.WriteAllLines(m_strLogName, LogMessages);
+      }
+      catch (DirectoryNotFoundException p_exDir)
+      {
+        LogErrorAndQuit(String.Format(Constants.IMG_LOG_MSG_DIR_EXCEPTION, p_exDir.Message));
+      }
+      catch (IOException p_exIO)
+      {
+        LogErrorAndQuit(String.Format(Constants.IMG_LOG_MSG_IO_EXCEPTION, p_exIO.Message));
+      }
+      catch (UnauthorizedAccessException p_exAccess)
+      {
+        LogErrorAndQuit(String.Format(Constants.IMG_LOG_MSG_ACCESS_EXCEPTION, p_exAccess.Message));
+      }
     }
   }
 }

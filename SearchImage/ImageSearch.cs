@@ -104,6 +104,9 @@ namespace SearchImage
     public void LoadProjects()
     {
       GlobalResult.LogGeneralMessage(Constants.IMG_SEARCH_MSG_START_APP);
+      GlobalResult.LogGeneralMessage(String.Format(Constants.IMG_SEARCH_MSG_START_BASE_DIR, BasePath));
+      GlobalResult.LogGeneralMessage(String.Format(Constants.IMG_SEARCH_MSG_START_BASE_IMAGE_DIR, ImagePath));
+      GlobalResult.LogGeneralMessage(String.Format(Constants.IMG_SEARCH_MSG_START_IMAGE_NAME, ImageName));
       GlobalResult.LogGeneralMessage(Constants.IMG_SEARCH_MSG_START_LOADING_PROJECT);
       IEnumerable<string> m_lstProjects;
       try

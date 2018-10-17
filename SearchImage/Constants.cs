@@ -51,12 +51,15 @@
     public const string IMG_SEARCH_MSG_ERROR_IO_EXCEPTION = "*DOC* I/O exception found on base path {0}. Message: {1}";
 
     public const string IMG_SEARCH_MSG_START_APP = "*DOC* Program to search for image files on documentation projects";
+    public const string IMG_SEARCH_MSG_START_BASE_DIR = "*DOC* Base directory to search for: {0}";
+    public const string IMG_SEARCH_MSG_START_BASE_IMAGE_DIR = "*DOC* Base directory of image file: {0}";
+    public const string IMG_SEARCH_MSG_START_IMAGE_NAME = "*DOC* Image filename to search for: {0}";
     public const string IMG_SEARCH_MSG_START_LOADING_PROJECT = "*DOC* Starting to load projects...";
     public const string IMG_SEARCH_MSG_PROJECT_FOUND = "*DOC* Number of projects found: {0}\r\n*DOC* Number of projects loaded: {1}";
     public const string IMG_SEARCH_MSG_REFERENCE_FOUND = "*DOC* Number of references found: {0}";
     public const string IMG_SEARCH_MSG_NO_REFERENCE_FOUND = "*DOC* No references found for '{0}'";
     public const string IMG_SEARCH_MSG_ERROR_NO_PROJECT = "*DOC* Directory '{0}' does not contain any Help & Manual project (.hmxp)";
-    public const string IMG_SEARCH_MSG_START_SEARCH_IMAGE = "*DOC* Starting to search topics for image filename '{0}'...";
+    public const string IMG_SEARCH_MSG_START_SEARCH_IMAGE = "*DOC* Starting to search topics on projects for image filename '{0}'...";
     public const string IMG_SEARCH_PROJECT_EXTENSION = "*.hmxp";
     public const string IMG_SEARCH_PROJECT_IMAGE_FOLDER = "{0}\\";
     public const string IMG_SEARCH_MSG_EXECUTION_TIME = "*DOC* Total time of this search: {0:00}:{1:00}:{2:00}.{3:000}";
@@ -74,5 +77,8 @@
     public const string IMG_LOG_FILENAME = "{0}\\searchimage_{1}.log";
     public const string IMG_LOG_FULLDATE = "yyyyMMddHHmmssfff";
     public const string IMG_LOG_MORE_INFO = "*DOC* Please check log file {0} for more information about this search";
+    public const string IMG_LOG_MSG_DIR_EXCEPTION = "*DOC* Directory not found exception. Message: {0}";
+    public const string IMG_LOG_MSG_IO_EXCEPTION = "*DOC* I/O exception. Message: {0}";
+    public const string IMG_LOG_MSG_ACCESS_EXCEPTION = "*DOC* Unauthorized access exception. Message: {0}";
   }
 }
